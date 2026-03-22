@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Tell Tailwind exactly where to scan for class names.
+   Paths are relative to this file (src/app/globals.css).
+   "../**" resolves to src/** covering all components, pages, and lib files. */
+@source "../**/*.{tsx,ts,jsx,js}";
+
+@theme {
+  /* ── Colors ──────────────────────────────────────────────────────── */
+  --color-background:    #0F172A;
+  --color-surface:       #1E293B;
+  --color-surface-high:  #334155;
+  --color-text-primary:  #F8FAFC;  /* used as: text-text-primary, bg-text-primary  */
+  --color-text-muted:    #94A3B8;  /* used as: text-text-muted, placeholder:text-text-muted  */
+  --color-ai-accent:     #00d4ec;
+  --color-btc-accent:    #F59E0B;
+  --color-error:         #FF716C;
+
+  /* ── Fonts ───────────────────────────────────────────────────────── */
+  /* Fallback stacks here; next/font CSS vars (--font-space-grotesk etc.)
+     are injected on <html> at runtime and cascade into these values.   */
+  --font-headline: var(--font-space-grotesk, "Space Grotesk"), sans-serif;
+  --font-body:     var(--font-dm-sans, "DM Sans"), sans-serif;
+  --font-code:     var(--font-fira-code, "Fira Code"), monospace;
+}
+
+/* ── Base layer ──────────────────────────────────────────────────────── */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ai-accent);
+    outline-offset: 2px;
+  }
+}

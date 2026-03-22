@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAVI CHAHAL | AI &amp; Bitcoin Editorial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#1cdaf2",
+              "outline-variant": "#3b494c",
+              "on-primary-fixed-variant": "#004f58",
+              "surface-container-low": "#171b27",
+              "surface-container-high": "#252a36",
+              "surface": "#0e131e",
+              "primary-container": "#00d4ec",
+              "outline": "#859396",
+              "secondary": "#e5c363",
+              "tertiary": "#ffd6a3",
+              "tertiary-fixed-dim": "#ffb957",
+              "surface-container": "#1b1f2b",
+              "on-surface": "#dee2f2",
+              "secondary-container": "#775e00",
+              "background": "#0e131e",
+              "inverse-on-surface": "#2b303c",
+              "on-secondary": "#3d2f00",
+              "secondary-fixed": "#ffe08c",
+              "on-secondary-fixed": "#241a00",
+              "on-tertiary-container": "#6e4600",
+              "surface-dim": "#0e131e",
+              "on-tertiary-fixed-variant": "#643f00",
+              "tertiary-fixed": "#ffddb5",
+              "primary": "#80ecff",
+              "on-primary-container": "#005762",
+              "on-error": "#690005",
+              "surface-bright": "#343946",
+              "on-tertiary-fixed": "#2a1800",
+              "primary-fixed": "#9bf0ff",
+              "primary-fixed-dim": "#1cdaf2",
+              "on-primary-fixed": "#001f24",
+              "on-primary": "#00363d",
+              "inverse-surface": "#dee2f2",
+              "on-error-container": "#ffdad6",
+              "error": "#ffb4ab",
+              "on-secondary-container": "#fcd976",
+              "surface-container-highest": "#303541",
+              "on-secondary-fixed-variant": "#584400",
+              "on-background": "#dee2f2",
+              "tertiary-container": "#ffb13b",
+              "inverse-primary": "#006875",
+              "surface-variant": "#303541",
+              "surface-container-lowest": "#090e19",
+              "on-surface-variant": "#bac9cc",
+              "on-tertiary": "#462b00",
+              "error-container": "#93000a",
+              "secondary-fixed-dim": "#e5c363"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(48, 53, 65, 0.4);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(133, 147, 150, 0.1);
+      }
+      .electric-gradient {
+        background: linear-gradient(135deg, #80ecff 0%, #00d4ec 100%);
+      }
+      body {
+        background-color: #0e131e;
+        color: #dee2f2;
+      }
+    </style>
+</head>
+<body class="font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-900/40 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(128,236,255,0.06)]">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-white uppercase font-headline">RAVI CHAHAL</div>
+<div class="hidden md:flex items-center space-x-8 font-headline tracking-tight text-sm uppercase">
+<a class="text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1" href="#">Latest</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">The Lab</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">About</a>
+</div>
+<button class="electric-gradient text-on-primary font-bold px-6 py-2.5 rounded-full scale-95 active:scale-90 transition-transform font-headline text-sm uppercase">
+                Join the Feed
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-20 overflow-x-hidden">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="flex flex-col items-center text-center">
+<h1 class="font-headline text-6xl md:text-8xl font-bold tracking-tighter text-white mb-6 leading-none">
+                    Where AI Agents<br/><span class="text-primary">Meet Bitcoin</span>
+</h1>
+<p class="text-outline text-xl max-w-2xl mb-12 font-light">
+                    Experiments, patterns, and raw takes on the two technologies reshaping everything. Updated by AI agents. Written by a human.
+                </p>
+<div class="w-full max-w-xl flex flex-col items-center">
+<div class="w-full flex p-1 rounded-full bg-surface-container-high border border-outline-variant/30 shadow-2xl mb-4 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<input class="flex-1 bg-transparent border-none focus:ring-0 px-6 py-3 text-on-surface placeholder:text-outline/50 font-body" placeholder="your@email.com" type="email"/>
+<button class="electric-gradient text-on-primary font-black px-8 py-3 rounded-full hover:shadow-[0_0_20px_rgba(128,236,255,0.4)] transition-all uppercase tracking-wider text-xs">
+                            Join the Feed
+                        </button>
+</div>
+<p class="text-outline/60 text-xs font-label uppercase tracking-widest">Free. No spam. Agents deliver fresh content weekly.</p>
+</div>
+</div>
+</section>
+<!-- Two Pillars Section -->
+<section class="max-w-7xl mx-auto px-8 mb-32 grid md:grid-cols-2 gap-8">
+<div class="glass-card p-10 rounded-lg group hover:bg-surface-container-high/50 transition-all duration-500">
+<div class="mb-6 flex items-center justify-between">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="robot">robot</span>
+<span class="text-xs font-label uppercase tracking-tighter opacity-20 group-hover:opacity-100 transition-opacity">0x01</span>
+</div>
+<h3 class="font-headline text-3xl font-bold text-primary mb-4 uppercase">Agentic AI</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                    Production agent systems with LangGraph, Claude Code, and OpenClaw. Architecture for the autonomous future.
+                </p>
+</div>
+<div class="glass-card p-10 rounded-lg group hover:bg-surface-container-high/50 transition-all duration-500">
+<div class="mb-6 flex items-center justify-between">
+<span class="material-symbols-outlined text-4xl text-secondary" data-icon="currency_bitcoin">currency_bitcoin</span>
+<span class="text-xs font-label uppercase tracking-tighter opacity-20 group-hover:opacity-100 transition-opacity">0x02</span>
+</div>
+<h3 class="font-headline text-3xl font-bold text-secondary mb-4 uppercase">Bitcoin</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                    Sound money, Lightning network, self-custody protocols, and macro-economic shifts. Freedom by code.
+                </p>
+</div>
+</section>
+<!-- Latest Section (Bento Grid Style) -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="flex items-end justify-between mb-12">
+<h2 class="font-headline text-5xl font-bold tracking-tighter text-white uppercase">Latest</h2>
+<div class="h-[1px] flex-1 mx-8 bg-outline-variant/20 mb-3"></div>
+<p class="text-outline text-sm font-label uppercase tracking-widest pb-2">Stream: Live</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+<!-- Post Card 1 -->
+<div class="bg-surface-container-low p-8 hover:bg-surface-container-high transition-colors cursor-pointer border border-white/5">
+<span class="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-primary/10 text-primary mb-6">Agentic AI</span>
+<h4 class="font-headline text-2xl font-bold text-white mb-3 leading-tight">Prompting Claude for Systemic Logic</h4>
+<p class="text-outline text-sm line-clamp-2 mb-6 opacity-80">Building stateful graphs that manage complex workflows without human intervention.</p>
+<time class="text-[10px] font-label uppercase tracking-widest text-outline/40">MAR 14, 2026</time>
+</div>
+<!-- Post Card 2 -->
+<div class="bg-surface-container-low p-8 hover:bg-surface-container-high transition-colors cursor-pointer border border-white/5">
+<span class="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-secondary/10 text-secondary mb-6">Bitcoin</span>
+<h4 class="font-headline text-2xl font-bold text-white mb-3 leading-tight">The Lightning Liquidity Problem</h4>
+<p class="text-outline text-sm line-clamp-2 mb-6 opacity-80">Why inbound capacity remains the biggest hurdle for merchant adoption.</p>
+<time class="text-[10px] font-label uppercase tracking-widest text-outline/40">MAR 10, 2026</time>
+</div>
+<!-- Post Card 3 -->
+<div class="bg-surface-container-low p-8 hover:bg-surface-container-high transition-colors cursor-pointer border border-white/5">
+<span class="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-primary/10 text-primary mb-6">Agentic AI</span>
+<h4 class="font-headline text-2xl font-bold text-white mb-3 leading-tight">LangGraph Deep Dive</h4>
+<p class="text-outline text-sm line-clamp-2 mb-6 opacity-80">How cycles and persistence change the game for LLM orchestration.</p>
+<time class="text-[10px] font-label uppercase tracking-widest text-outline/40">MAR 05, 2026</time>
+</div>
+<!-- Post Card 4 -->
+<div class="bg-surface-container-low p-8 hover:bg-surface-container-high transition-colors cursor-pointer border border-white/5">
+<span class="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-secondary/10 text-secondary mb-6">Bitcoin</span>
+<h4 class="font-headline text-2xl font-bold text-white mb-3 leading-tight">Self-Custody or Bust</h4>
+<p class="text-outline text-sm line-clamp-2 mb-6 opacity-80">A survivalist guide to keeping your keys away from centralized exchanges.</p>
+<time class="text-[10px] font-label uppercase tracking-widest text-outline/40">FEB 28, 2026</time>
+</div>
+<!-- Post Card 5 -->
+<div class="bg-surface-container-low p-8 hover:bg-surface-container-high transition-colors cursor-pointer border border-white/5">
+<span class="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-primary/10 text-primary mb-6">Agentic AI</span>
+<h4 class="font-headline text-2xl font-bold text-white mb-3 leading-tight">OpenClaw: Open Source Agents</h4>
+<p class="text-outline text-sm line-clamp-2 mb-6 opacity-80">Democratizing the agent stack for private infra deployment.</p>
+<time class="text-[10px] font-label uppercase tracking-widest text-outline/40">FEB 22, 2026</time>
+</div>
+<!-- Post Card 6 -->
+<div class="bg-surface-container-low p-8 hover:bg-surface-container-high transition-colors cursor-pointer border border-white/5">
+<span class="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter bg-secondary/10 text-secondary mb-6">Bitcoin</span>
+<h4 class="font-headline text-2xl font-bold text-white mb-3 leading-tight">Macro Scarcity Trends</h4>
+<p class="text-outline text-sm line-clamp-2 mb-6 opacity-80">Why the 2026 halving is different from every cycle before it.</p>
+<time class="text-[10px] font-label uppercase tracking-widest text-outline/40">FEB 15, 2026</time>
+</div>
+</div>
+</section>
+<!-- The Lab Section -->
+<section class="max-w-7xl mx-auto px-8 mb-32 relative">
+<div class="flex flex-col mb-16">
+<div class="flex items-center gap-4 mb-4">
+<h2 class="font-headline text-5xl font-bold tracking-tighter text-white uppercase">The Lab</h2>
+<span class="material-symbols-outlined text-3xl text-secondary" data-icon="lock">lock</span>
+</div>
+<p class="text-outline text-lg max-w-xl">Subscriber-only experiments. Access raw code, architectural diagrams, and failed prototypes from the edge.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Lab Card 1 -->
+<div class="relative group overflow-hidden rounded-lg">
+<div class="absolute inset-0 bg-surface-container-highest/80 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 opacity-100 group-hover:bg-surface-container-highest/60 transition-all">
+<span class="material-symbols-outlined text-4xl text-white mb-4" data-icon="encrypted">encrypted</span>
+<p class="text-xs font-label uppercase tracking-widest text-white/60">Locked Experiment</p>
+</div>
+<div class="p-10 border border-outline-variant/20 h-64 flex flex-col justify-end">
+<div class="flex justify-between items-center">
+<h5 class="font-headline font-bold text-xl">Auto-Trader v0.1</h5>
+<span class="bg-green-500/10 text-green-400 text-[10px] font-black px-2 py-1 rounded uppercase">ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Lab Card 2 -->
+<div class="relative group overflow-hidden rounded-lg">
+<div class="absolute inset-0 bg-surface-container-highest/80 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 opacity-100">
+<span class="material-symbols-outlined text-4xl text-white mb-4" data-icon="encrypted">encrypted</span>
+<p class="text-xs font-label uppercase tracking-widest text-white/60">Locked Experiment</p>
+</div>
+<div class="p-10 border border-outline-variant/20 h-64 flex flex-col justify-end">
+<div class="flex justify-between items-center">
+<h5 class="font-headline font-bold text-xl">Self-Healing Mesh</h5>
+<span class="bg-blue-500/10 text-blue-400 text-[10px] font-black px-2 py-1 rounded uppercase">COMPLETED</span>
+</div>
+</div>
+</div>
+<!-- Lab Card 3 -->
+<div class="relative group overflow-hidden rounded-lg">
+<div class="absolute inset-0 bg-surface-container-highest/80 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 opacity-100">
+<span class="material-symbols-outlined text-4xl text-white mb-4" data-icon="encrypted">encrypted</span>
+<p class="text-xs font-label uppercase tracking-widest text-white/60">Locked Experiment</p>
+</div>
+<div class="p-10 border border-outline-variant/20 h-64 flex flex-col justify-end">
+<div class="flex justify-between items-center">
+<h5 class="font-headline font-bold text-xl">Mining Rig API</h5>
+<span class="bg-green-500/10 text-green-400 text-[10px] font-black px-2 py-1 rounded uppercase">ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<button class="px-8 py-4 rounded-full border border-secondary text-secondary font-headline font-bold uppercase tracking-widest text-sm hover:bg-secondary hover:text-on-secondary transition-all">
+                    Subscribe to unlock The Lab
+                </button>
+</div>
+</section>
+<!-- About Section -->
+<section class="max-w-4xl mx-auto px-8 mb-32">
+<div class="bg-surface-container-low rounded-lg p-12 flex flex-col md:flex-row items-center gap-12">
+<div class="w-40 h-40 rounded-full overflow-hidden flex-shrink-0 grayscale hover:grayscale-0 transition-all ring-4 ring-outline-variant/20 shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Professional portrait of Ravi Chahal" src="https://lh3.googleusercontent.com/aida/ADBb0uhVZ2jGyx6LBe8S0V8_OCWbHwNeV5pzgc2kHnnYqDMGL9EDoDsXRohQ6tC0usAw7OdkiCONJ9WD04AcvEt766x9fwoemI0SyPnS2s8zKQirb6GYzooDcuHAdiCBlZ8wUcgV9d0hQnqdkpG1WJFITp1LXn8sRgk_KuW4nMzmyzUWsHmh7G4goZBDNjbAmZZdJiwQGaqWfFBMFbF4bpxVBUDQXzAkxOuCImhDJDwgk70NXMSl1e9kzZBIJGTx3WkOQwiK9v3EKNMeTx4"/>
+</div>
+<div>
+<h2 class="font-headline text-4xl font-bold text-white mb-6 uppercase">About Ravi</h2>
+<p class="text-on-surface-variant text-xl leading-relaxed mb-8">I am Ravi. I build AI agents by day and study <span class="text-secondary font-bold">Bitcoin</span> by conviction. This is my public notebook—a synthesis of engineering and monetary theory.</p>
+<div class="flex gap-6">
+<a class="text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="link">link</span>
+</a>
+<a class="text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="code">code</span>
+</a>
+<a class="text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="alternate_email">alternate_email</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 px-8">
+<div class="bg-gradient-to-r from-transparent via-slate-800 to-transparent h-[1px] mb-8 w-full max-w-screen-2xl mx-auto"></div>
+<div class="flex flex-col items-center justify-center space-y-4 w-full text-center">
+<div class="text-lg font-black text-white font-headline tracking-widest uppercase">RAVI CHAHAL</div>
+<div class="flex space-x-6">
+<a class="font-inter text-xs tracking-widest uppercase opacity-80 text-slate-500 hover:text-cyan-300 transition-colors" href="#">LinkedIn</a>
+<a class="font-inter text-xs tracking-widest uppercase opacity-80 text-slate-500 hover:text-cyan-300 transition-colors" href="#">GitHub</a>
+<a class="font-inter text-xs tracking-widest uppercase opacity-80 text-slate-500 hover:text-cyan-300 transition-colors" href="#">RSS</a>
+</div>
+<p class="font-inter text-xs tracking-widest uppercase opacity-80 text-slate-600 mt-4">© 2026 Ravi Chahal</p>
+</div>
+</footer>
+</body></html>
