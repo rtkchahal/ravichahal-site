@@ -1,8 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
-
-const SUBSCRIBERS_FILE = path.join(process.cwd(), "src/data/subscribers.json");
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -27,30 +23,54 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Read existing subscribers
-    let subscribers: string[] = [];
-    try {
-      const raw = await fs.readFile(SUBSCRIBERS_FILE, "utf-8");
-      subscribers = JSON.parse(raw);
-    } catch {
-      subscribers = [];
+    // Subscribe via Buttondown API
+    const res = await fetch("https://api.buttondown.com/v1/subscribers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${process.env.BUTTONDOWN_API_KEY}`,
+      },
+      body: JSON.stringify({
+        email_address: email.toLowerCase(),
+        type: "regular",
+      }),
+    });
+
+    if (res.status === 201) {
+      return NextResponse.json(
+        { success: true, message: "You're in! Check your inbox." },
+        { status: 201 }
+      );
     }
 
-    // Check for duplicate
-    if (subscribers.includes(email.toLowerCase())) {
+    const data = await res.json();
+    const detail = JSON.stringify(data).toLowerCase();
+
+    if (detail.includes("already") || detail.includes("duplicate")) {
       return NextResponse.json(
         { error: "You're already subscribed!" },
         { status: 409 }
       );
     }
 
-    // Add new subscriber
-    subscribers.push(email.toLowerCase());
-    await fs.writeFile(SUBSCRIBERS_FILE, JSON.stringify(subscribers, null, 2));
+    if (detail.includes("blocked") || detail.includes("firewall")) {
+      // Buttondown firewall can block disposable/suspicious emails
+      return NextResponse.json(
+        { error: "Please use a valid email address." },
+        { status: 400 }
+      );
+    }
+
+    if (res.ok) {
+      return NextResponse.json(
+        { success: true, message: "You're in! Check your inbox." },
+        { status: 201 }
+      );
+    }
 
     return NextResponse.json(
-      { success: true, message: "You're in! Check your inbox." },
-      { status: 201 }
+      { error: "Something went wrong. Please try again." },
+      { status: 500 }
     );
   } catch (err) {
     console.error("[subscribe] Error:", err);
