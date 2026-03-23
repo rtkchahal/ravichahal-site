@@ -12,14 +12,24 @@ export default function StickyHeader() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
+    setSubscribed(localStorage.getItem("subscribed") === "true");
+    const handler = () => setSubscribed(localStorage.getItem("subscribed") === "true");
+    window.addEventListener("subscribed", handler);
+    window.addEventListener("storage", handler);
+
     function handleScroll() {
       setVisible(window.scrollY > 600);
     }
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("subscribed", handler);
+      window.removeEventListener("storage", handler);
+    };
   }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -55,7 +65,7 @@ export default function StickyHeader() {
   return (
     <div
       className={`fixed top-0 left-0 right-0 z-[100] bg-slate-900/80 backdrop-blur-xl border-b border-white/10 transition-transform duration-300 ${
-        visible ? "translate-y-0" : "-translate-y-full"
+        visible && !subscribed ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="max-w-screen-2xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between gap-4">

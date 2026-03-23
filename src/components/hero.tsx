@@ -16,9 +16,13 @@ export default function Hero() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const prefersReducedMotion = useRef(false);
 
   useEffect(() => {
+    setMounted(true);
+    setAlreadySubscribed(localStorage.getItem("subscribed") === "true");
     if (typeof window !== "undefined") {
       prefersReducedMotion.current = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
@@ -125,7 +129,22 @@ export default function Hero() {
 
         {/* Email form */}
         <div className="w-full max-w-xl flex flex-col items-center">
-          {submitted ? (
+          {mounted && alreadySubscribed && !submitted ? (
+            <div className="w-full flex flex-col items-center gap-3 mb-4">
+              <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-ai-accent/10 border border-ai-accent/30">
+                <span className="text-ai-accent text-sm font-semibold" style={{ fontFamily: "var(--font-headline)" }}>
+                  ✓ You&apos;re subscribed
+                </span>
+              </div>
+              <a
+                href="/lab"
+                className="text-ai-accent text-sm hover:underline transition-colors duration-200"
+                style={{ fontFamily: "var(--font-headline)" }}
+              >
+                Enter The Lab →
+              </a>
+            </div>
+          ) : submitted ? (
             <div className="w-full flex items-center justify-center p-4 rounded-full bg-ai-accent/10 border border-ai-accent/30 mb-4">
               <span className="text-ai-accent font-semibold">
                 You&apos;re in! Check your inbox.
