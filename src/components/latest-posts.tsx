@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { POSTS } from "@/lib/data";
+import { getAllPosts } from "@/lib/posts";
 
 export default function LatestPosts() {
   // Show only the 6 most recent posts on the homepage
-  const posts = POSTS.slice(0, 6);
+  const posts = getAllPosts().slice(0, 6);
 
   return (
     <section id="latest" className="max-w-7xl mx-auto px-6 md:px-8 mb-32">

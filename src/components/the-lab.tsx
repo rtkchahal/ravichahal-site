@@ -1,5 +1,8 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Lock } from "lucide-react";
+import { Lock, FlaskConical } from "lucide-react";
 import { LAB_EXPERIMENTS } from "@/lib/data";
 
 function statusStyles(status: string) {
@@ -8,17 +11,33 @@ function statusStyles(status: string) {
       return "bg-ai-accent/10 text-ai-accent";
     case "completed":
       return "bg-green-500/10 text-green-400";
-    case "paused":
-      return "bg-btc-accent/10 text-btc-accent";
     default:
-      return "bg-surface-high text-text-muted";
+      return "bg-btc-accent/10 text-btc-accent";
   }
 }
 
 export default function TheLab() {
+  const [subscribed, setSubscribed] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setSubscribed(localStorage.getItem("subscribed") === "true");
+
+    // Listen for storage changes (from other components on same page)
+    const handler = () => {
+      setSubscribed(localStorage.getItem("subscribed") === "true");
+    };
+    window.addEventListener("storage", handler);
+    window.addEventListener("subscribed", handler);
+    return () => {
+      window.removeEventListener("storage", handler);
+      window.removeEventListener("subscribed", handler);
+    };
+  }, []);
+
   return (
     <section id="the-lab" className="max-w-7xl mx-auto px-6 md:px-8 mb-32">
-      {/* Section header */}
       <div className="flex flex-col mb-16">
         <div className="flex items-center gap-4 mb-4">
           <h2
@@ -27,49 +46,56 @@ export default function TheLab() {
           >
             The Lab
           </h2>
-          <Lock className="w-8 h-8 text-btc-accent" strokeWidth={1.5} />
+          <Lock className="w-8 h-8 text-btc-accent" />
         </div>
         <p
           className="text-text-muted text-lg max-w-xl leading-relaxed"
           style={{ fontFamily: "var(--font-body)" }}
         >
-          Subscriber-only experiments. Access raw code, architectural diagrams,
-          and failed prototypes from the edge.
+          Subscriber-only experiments. Access raw data, architectural decisions, and results from the edge.
         </p>
       </div>
 
-      {/* Experiment cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {LAB_EXPERIMENTS.map((experiment) => (
-          <div
-            key={experiment.id}
-            className="relative group overflow-hidden rounded-2xl"
-          >
-            {/* Blur overlay */}
-            <div className="absolute inset-0 bg-surface-high/80 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 group-hover:bg-surface-high/60 transition-all duration-300">
-              <Lock className="w-10 h-10 text-text-primary mb-4" strokeWidth={1.5} />
-              <p
-                className="text-xs uppercase tracking-widest text-text-primary/60"
-                style={{ fontFamily: "var(--font-headline)" }}
-              >
-                Locked Experiment
-              </p>
-            </div>
-
-            {/* Card body */}
+        {LAB_EXPERIMENTS.map((exp) => (
+          <div key={exp.id} className="relative group overflow-hidden rounded-2xl">
+            {/* Blur overlay - only show when not subscribed */}
+            {mounted && !subscribed && (
+              <div className="absolute inset-0 bg-surface-high/80 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 group-hover:bg-surface-high/60 transition-all duration-300">
+                <Lock className="w-10 h-10 text-text-primary mb-4" />
+                <p
+                  className="text-xs uppercase tracking-widest text-text-primary/60"
+                  style={{ fontFamily: "var(--font-headline)" }}
+                >
+                  Locked Experiment
+                </p>
+              </div>
+            )}
+            {/* Unlocked state */}
+            {mounted && subscribed && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center p-8 bg-ai-accent/5 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <FlaskConical className="w-10 h-10 text-ai-accent mb-4" />
+                <p
+                  className="text-xs uppercase tracking-widest text-ai-accent"
+                  style={{ fontFamily: "var(--font-headline)" }}
+                >
+                  View Experiment
+                </p>
+              </div>
+            )}
             <div className="p-10 border border-white/5 h-64 flex flex-col justify-end bg-surface/60">
               <div className="flex justify-between items-center">
                 <h5
                   className="font-bold text-xl text-text-primary"
                   style={{ fontFamily: "var(--font-headline)" }}
                 >
-                  {experiment.title}
+                  {exp.title}
                 </h5>
                 <span
-                  className={`text-[10px] font-black px-2 py-1 rounded uppercase ${statusStyles(experiment.status)}`}
+                  className={`text-[10px] font-black px-2 py-1 rounded uppercase ${statusStyles(exp.status)}`}
                   style={{ fontFamily: "var(--font-headline)" }}
                 >
-                  {experiment.status}
+                  {exp.status}
                 </span>
               </div>
             </div>
@@ -77,15 +103,24 @@ export default function TheLab() {
         ))}
       </div>
 
-      {/* CTA */}
       <div className="mt-12 text-center">
-        <Link
-          href="/lab"
-          className="inline-block px-8 py-4 rounded-full border border-btc-accent text-btc-accent font-bold uppercase tracking-widest text-sm hover:bg-btc-accent hover:text-slate-900 transition-all duration-200 cursor-pointer"
-          style={{ fontFamily: "var(--font-headline)" }}
-        >
-          Subscribe to unlock The Lab
-        </Link>
+        {mounted && subscribed ? (
+          <Link
+            href="/lab"
+            className="px-8 py-4 rounded-full bg-ai-accent text-slate-900 font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_20px_rgba(0,212,236,0.4)] transition-all duration-200 cursor-pointer inline-block"
+            style={{ fontFamily: "var(--font-headline)" }}
+          >
+            Enter The Lab
+          </Link>
+        ) : (
+          <Link
+            href="/lab"
+            className="px-8 py-4 rounded-full border border-btc-accent text-btc-accent font-bold uppercase tracking-widest text-sm hover:bg-btc-accent hover:text-slate-900 transition-all duration-200 cursor-pointer inline-block"
+            style={{ fontFamily: "var(--font-headline)" }}
+          >
+            Subscribe to unlock The Lab
+          </Link>
+        )}
       </div>
     </section>
   );

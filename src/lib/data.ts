@@ -1,7 +1,4 @@
-import { getAllPosts } from "./posts";
-
-// Re-export posts from MDX files (server-only — uses fs)
-export const POSTS = getAllPosts();
+// LAB_EXPERIMENTS — safe for client components (no fs dependency)
 
 export interface LabExperiment {
   id: number;
@@ -33,7 +30,7 @@ export const LAB_EXPERIMENTS: LabExperiment[] = [
     title: "R&D Council",
     status: "active",
     description:
-      "A multi-agent council that convenes weekly to evaluate content strategy, research directions, and site experiments. Each agent plays a distinct role: Strategist, Editor, Researcher, Devil's Advocate.",
+      "A multi-agent council that convenes twice daily to evaluate content strategy, research directions, and site experiments. Three AI models debate: one proposes, one challenges, one synthesizes.",
     link: "/council",
   },
 ];

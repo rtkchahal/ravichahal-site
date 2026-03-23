@@ -87,6 +87,7 @@ export default function Hero() {
         setError(data.error ?? "Something went wrong. Please try again.");
       } else {
         localStorage.setItem("subscribed", "true");
+        window.dispatchEvent(new Event("subscribed"));
         setSubmitted(true);
       }
     } catch {
