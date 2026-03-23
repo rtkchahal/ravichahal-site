@@ -1,0 +1,17 @@
+name: ravichahal-site
+description: Personal content platform — Agentic AI + Bitcoin
+type: nextjs
+repo: github.com/rtkchahal/ravichahal-site
+url: https://ravichahal-site.vercel.app
+agent: growth-lab
+deploy: vercel
+newsletter: buttondown
+channels:
+  - discord:1485703164618346511  # #ravichahal-site
+  - discord:1478317876355010652  # #growth-lab (shared)
+content:
+  posts: src/content/posts/
+  lab: council/
+  design: DESIGN.md
+cron:
+  council: "74863e05-336f-4bb6-8e25-0209e43c41b8"
