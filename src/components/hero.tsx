@@ -87,7 +87,13 @@ export default function Hero() {
       });
       const data = await res.json();
 
-      if (!res.ok) {
+      if (res.status === 409) {
+        // Already subscribed — unlock everything
+        localStorage.setItem("subscribed", "true");
+        window.dispatchEvent(new Event("subscribed"));
+        setAlreadySubscribed(true);
+        setSubmitted(true);
+      } else if (!res.ok) {
         setError(data.error ?? "Something went wrong. Please try again.");
       } else {
         localStorage.setItem("subscribed", "true");
