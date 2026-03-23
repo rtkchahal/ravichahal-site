@@ -1,0 +1,40 @@
+---
+title: "Prompting Claude for Systemic Logic"
+tag: ai
+preview: "Building stateful graphs that manage complex workflows without human intervention."
+date: "2026-03-14"
+slug: "prompting-claude-systemic-logic"
+---
+
+Most developers treat Claude as a question-answering machine. They fire a prompt, get a response, and move on. That mental model works for simple tasks, but it completely breaks down when you need an agent to manage a multi-step workflow that spans hours, not milliseconds.
+
+The shift I made — and it changed everything — was treating Claude as a **reasoning engine inside a stateful graph**. The graph manages state. Claude manages logic. Neither does the other's job.
+
+## The Core Pattern
+
+Here's the insight: Claude is phenomenally good at deciding *what should happen next* given a structured description of the current world. It's not good at remembering what happened five turns ago unless you explicitly put that history in context.
+
+So the pattern becomes:
+
+1. Maintain state externally (Redis, Postgres, a simple JSON object)
+2. At each step, serialize relevant state into the prompt
+3. Ask Claude to output a structured decision — not prose, a JSON action
+4. Execute the action, update state, loop
+
+```typescript
+const decision = await claude.complete({
+  system: AGENT_SYSTEM_PROMPT,
+  user: `Current state: ${JSON.stringify(state)}\nWhat is the next action?`,
+  schema: ActionSchema,
+});
+```
+
+## Why Systemic Prompts Work Better
+
+Generic prompts produce generic outputs. A systemic prompt describes the agent's *role in a larger system*: what inputs it receives, what outputs are expected, what failure modes to avoid, and what constraints are non-negotiable.
+
+When Claude understands its position in the pipeline — not just the task in isolation — it makes better decisions, produces more consistent outputs, and fails gracefully rather than catastrophically.
+
+This is the difference between an assistant and an agent. Assistants wait for instructions. Agents understand the system they operate within and act accordingly.
+
+The next frontier is giving agents partial observability of other agents — structured summaries of what peer agents are doing — so the whole mesh can coordinate without a central orchestrator. That's where things get genuinely interesting.

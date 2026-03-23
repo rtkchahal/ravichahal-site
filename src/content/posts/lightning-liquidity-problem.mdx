@@ -1,0 +1,27 @@
+---
+title: "The Lightning Liquidity Problem"
+tag: btc
+preview: "Why inbound capacity remains the biggest hurdle for merchant adoption."
+date: "2026-03-10"
+slug: "lightning-liquidity-problem"
+---
+
+Every developer who has shipped a Lightning integration eventually runs into the same wall: **inbound liquidity**. You can open channels, you can route payments, but the moment a merchant needs to *receive* a significant payment, the architecture fights you.
+
+Here's the problem in plain terms. A Lightning channel is a two-party balance sheet. When you open a channel with 1 BTC, all of that capacity is on your side — you can *send* 1 BTC but you can *receive* nothing until the other side has pushed some funds to you. For a merchant who primarily receives payments, this is an immediate showstopper.
+
+## Why Inbound Capacity Is Hard
+
+The naive solution is to pay for inbound liquidity from a routing node. Services like Lightning Pool and the Lightning Service Provider ecosystem exist precisely for this. But they introduce economic overhead, trust assumptions, and operational complexity that most small merchants aren't equipped to handle.
+
+The deeper issue is that the channel management problem isn't a bug — it's a fundamental property of the payment channel model. Capital is scarce. It has to sit somewhere. And wherever it sits, the other side lacks that capacity.
+
+## The Emerging Solutions
+
+**Just-In-Time (JIT) channels** are the most promising near-term fix. An LSP opens a channel to the merchant at the moment of a payment, funded by the LSP's capital. The merchant pays a small fee. No pre-configuration needed.
+
+**Channel splicing** (now live on CLN and LDK-based implementations) lets you add or remove capital from channels without closing and reopening them, dramatically reducing the friction of rebalancing.
+
+**Trampoline routing** offloads path-finding to well-connected nodes, making it feasible for lightweight clients to receive payments without maintaining full network topology.
+
+None of these are perfect. Merchant Lightning adoption will remain niche until an LSP makes the inbound problem completely invisible to the end user — the same way Stripe hid the complexity of payment rails. That company will capture enormous value.

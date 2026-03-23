@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Lock } from "lucide-react";
 import { LAB_EXPERIMENTS } from "@/lib/data";
 
@@ -78,12 +79,13 @@ export default function TheLab() {
 
       {/* CTA */}
       <div className="mt-12 text-center">
-        <button
-          className="px-8 py-4 rounded-full border border-btc-accent text-btc-accent font-bold uppercase tracking-widest text-sm hover:bg-btc-accent hover:text-slate-900 transition-all duration-200 cursor-pointer"
+        <Link
+          href="/lab"
+          className="inline-block px-8 py-4 rounded-full border border-btc-accent text-btc-accent font-bold uppercase tracking-widest text-sm hover:bg-btc-accent hover:text-slate-900 transition-all duration-200 cursor-pointer"
           style={{ fontFamily: "var(--font-headline)" }}
         >
           Subscribe to unlock The Lab
-        </button>
+        </Link>
       </div>
     </section>
   );

@@ -1,50 +1,39 @@
-export const POSTS = [
+import { getAllPosts } from "./posts";
+
+// Re-export posts from MDX files (server-only — uses fs)
+export const POSTS = getAllPosts();
+
+export interface LabExperiment {
+  id: number;
+  title: string;
+  status: "active" | "completed" | "paused";
+  week?: string;
+  description: string;
+  link?: string;
+}
+
+export const LAB_EXPERIMENTS: LabExperiment[] = [
   {
     id: 1,
-    tag: "ai",
-    title: "Prompting Claude for Systemic Logic",
-    preview: "Building stateful graphs that manage complex workflows without human intervention.",
-    date: "MAR 14, 2026",
+    title: "LinkedIn Visibility Sprint",
+    status: "active",
+    week: "Week 2 of 4",
+    description:
+      "Testing whether a structured 4-week posting cadence — one AI post, one Bitcoin post, one personal take — meaningfully lifts profile impressions and newsletter subscribers. Tracking weekly deltas in a shared doc.",
   },
   {
     id: 2,
-    tag: "btc",
-    title: "The Lightning Liquidity Problem",
-    preview: "Why inbound capacity remains the biggest hurdle for merchant adoption.",
-    date: "MAR 10, 2026",
+    title: "Enterprise Agent Self-Learning Loop",
+    status: "active",
+    description:
+      "An agent that reviews its own past outputs, identifies recurring failure patterns, and rewrites its system prompt accordingly. No human intervention after the initial setup. Measuring output quality degradation or improvement over 30 iterations.",
   },
   {
     id: 3,
-    tag: "ai",
-    title: "LangGraph Deep Dive",
-    preview: "How cycles and persistence change the game for LLM orchestration.",
-    date: "MAR 05, 2026",
+    title: "R&D Council",
+    status: "active",
+    description:
+      "A multi-agent council that convenes weekly to evaluate content strategy, research directions, and site experiments. Each agent plays a distinct role: Strategist, Editor, Researcher, Devil's Advocate.",
+    link: "/council",
   },
-  {
-    id: 4,
-    tag: "btc",
-    title: "Self-Custody or Bust",
-    preview: "A survivalist guide to keeping your keys away from centralized exchanges.",
-    date: "FEB 28, 2026",
-  },
-  {
-    id: 5,
-    tag: "ai",
-    title: "OpenClaw: Open Source Agents",
-    preview: "Democratizing the agent stack for private infra deployment.",
-    date: "FEB 22, 2026",
-  },
-  {
-    id: 6,
-    tag: "btc",
-    title: "Macro Scarcity Trends",
-    preview: "Why the 2026 halving is different from every cycle before it.",
-    date: "FEB 15, 2026",
-  },
-];
-
-export const LAB_EXPERIMENTS = [
-  { id: 1, title: "Auto-Trader v0.1", status: "active" },
-  { id: 2, title: "Self-Healing Mesh", status: "completed" },
-  { id: 3, title: "Mining Rig API", status: "active" },
 ];

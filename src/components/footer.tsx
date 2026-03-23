@@ -16,25 +16,29 @@ export default function Footer() {
         {/* Social links */}
         <div className="flex space-x-6">
           <a
-            href="#"
+            href="https://linkedin.com/in/ravichahal"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-xs tracking-widest uppercase text-slate-500 hover:text-ai-accent transition-colors duration-200"
             style={{ fontFamily: "var(--font-body)" }}
           >
             LinkedIn
           </a>
           <a
-            href="#"
+            href="https://github.com/rtkchahal"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-xs tracking-widest uppercase text-slate-500 hover:text-ai-accent transition-colors duration-200"
             style={{ fontFamily: "var(--font-body)" }}
           >
             GitHub
           </a>
           <a
-            href="#"
+            href="mailto:ravi4chahal@gmail.com"
             className="text-xs tracking-widest uppercase text-slate-500 hover:text-ai-accent transition-colors duration-200"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            RSS
+            Email
           </a>
         </div>
 

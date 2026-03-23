@@ -1,0 +1,45 @@
+---
+title: "LangGraph Deep Dive"
+tag: ai
+preview: "How cycles and persistence change the game for LLM orchestration."
+date: "2026-03-05"
+slug: "langgraph-deep-dive"
+---
+
+LangGraph is the framework I reach for whenever an agent needs to do more than one thing. Not because it's the only option — CrewAI, AutoGen, and bare-metal async Python all have their place — but because LangGraph's graph model maps naturally onto how complex workflows actually behave.
+
+The key insight LangGraph encodes is that **real workflows have cycles**. A linear chain of LLM calls is fine for a pipeline. But agents that reflect, retry, route based on results, and loop until a condition is met — those need a graph.
+
+## State Is First-Class
+
+In LangGraph, state is not an afterthought. You define a typed state object at the start, and every node in the graph reads from and writes to that state. This sounds obvious, but it's a significant design win over chain-based frameworks where state gets shoved into a growing list of message objects.
+
+```python
+class AgentState(TypedDict):
+    messages: list[BaseMessage]
+    tool_results: list[dict]
+    iteration_count: int
+    final_answer: str | None
+```
+
+Every node gets the full state. Every node returns a partial update. The graph merges updates automatically. You never lose track of what happened.
+
+## Cycles and Conditional Edges
+
+This is where LangGraph earns its name. Conditional edges let you route to different nodes based on state:
+
+```python
+graph.add_conditional_edges(
+    "agent",
+    should_continue,
+    {"continue": "tools", "end": END}
+)
+```
+
+The `should_continue` function inspects state and returns a string key. Simple, explicit, debuggable. No magic routing via LLM outputs.
+
+## Persistence and Interrupts
+
+LangGraph's checkpointing system lets you pause a graph mid-execution, serialize state to disk or a database, and resume later. For long-running agents that need human approval at certain steps, this is essential infrastructure — not a nice-to-have.
+
+The framework is still evolving, but its core design decisions — explicit state, typed edges, first-class persistence — make it the most production-ready option I've encountered for stateful agent systems.

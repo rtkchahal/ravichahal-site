@@ -1,0 +1,31 @@
+---
+title: "OpenClaw: Open Source Agents"
+tag: ai
+preview: "Democratizing the agent stack for private infra deployment."
+date: "2026-02-22"
+slug: "openclaw-open-source-agents"
+---
+
+The current agent ecosystem has a centralization problem. The best agent frameworks are tied to proprietary APIs. The best models are behind rate limits and usage policies. If you need to run sensitive workloads — healthcare, legal, financial, government — you can't pipe your data through a third-party API. Full stop.
+
+OpenClaw is my attempt to address that constraint with a fully open-source agent stack designed for private infrastructure deployment.
+
+## The Design Philosophy
+
+OpenClaw is built around three principles:
+
+**No mandatory cloud dependencies.** Every component — the orchestrator, the tool registry, the memory layer — can run on-premises. The only external dependency is the model endpoint, and even that can be swapped for a locally hosted open-weight model via Ollama or vLLM.
+
+**Composable, not monolithic.** Rather than a single opinionated framework, OpenClaw exposes a set of contracts: what a tool looks like, what an agent interface looks like, what a memory provider looks like. You implement the contract. The orchestrator handles the rest.
+
+**Fail-safe by default.** Every agent action produces an audit log. Every tool call is sandboxed. Human-in-the-loop checkpoints can be inserted at any node in the graph with a single decorator.
+
+## Current State
+
+The project is in active development. The core orchestrator is stable. The tool registry supports function calling, web search (via SearXNG), and code execution (via Docker sandboxes). Memory backends for Redis and Postgres are implemented.
+
+What's missing: a proper UI for monitoring agent runs, better error recovery for long-running workflows, and documentation that doesn't require reading the source code to understand.
+
+## Why This Matters
+
+The organizations that most need agent automation — the ones sitting on decades of unstructured data and complex workflows — are precisely the organizations that cannot use cloud-hosted AI. OpenClaw is built for them. Every enterprise has a compliance team. This is what they'll approve.

@@ -40,21 +40,25 @@ export default function About() {
           {/* Social icons */}
           <div className="flex gap-6">
             <a
-              href="#"
+              href="https://linkedin.com/in/ravichahal"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-text-muted hover:text-ai-accent transition-colors duration-200"
               aria-label="LinkedIn"
             >
               <Link2 className="w-6 h-6" strokeWidth={1.5} />
             </a>
             <a
-              href="#"
+              href="https://github.com/rtkchahal"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-text-muted hover:text-ai-accent transition-colors duration-200"
               aria-label="GitHub"
             >
               <Code2 className="w-6 h-6" strokeWidth={1.5} />
             </a>
             <a
-              href="#"
+              href="mailto:ravi4chahal@gmail.com"
               className="text-text-muted hover:text-ai-accent transition-colors duration-200"
               aria-label="Email"
             >

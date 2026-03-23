@@ -1,10 +1,14 @@
+import Link from "next/link";
 import { Bot, Bitcoin } from "lucide-react";
 
 export default function Pillars() {
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-8 mb-32 grid md:grid-cols-2 gap-8">
       {/* AI Card */}
-      <div className="bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl p-10 group hover:shadow-[0_0_40px_rgba(0,212,236,0.06)] hover:bg-surface-high/30 transition-all duration-500 cursor-default">
+      <Link
+        href="/posts?filter=ai"
+        className="group block bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl p-10 hover:shadow-[0_0_40px_rgba(0,212,236,0.06)] hover:bg-surface-high/30 transition-all duration-500 cursor-pointer"
+      >
         <div className="mb-6 flex items-center justify-between">
           <Bot className="w-10 h-10 text-ai-accent" strokeWidth={1.5} />
           <span
@@ -24,10 +28,19 @@ export default function Pillars() {
           Production agent systems with LangGraph, Claude Code, and OpenClaw.
           Architecture for the autonomous future.
         </p>
-      </div>
+        <span
+          className="inline-block mt-6 text-xs text-ai-accent/60 uppercase tracking-widest group-hover:text-ai-accent transition-colors duration-200"
+          style={{ fontFamily: "var(--font-headline)" }}
+        >
+          View AI posts →
+        </span>
+      </Link>
 
       {/* Bitcoin Card */}
-      <div className="bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl p-10 group hover:shadow-[0_0_40px_rgba(245,158,11,0.06)] hover:bg-surface-high/30 transition-all duration-500 cursor-default">
+      <Link
+        href="/posts?filter=btc"
+        className="group block bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl p-10 hover:shadow-[0_0_40px_rgba(245,158,11,0.06)] hover:bg-surface-high/30 transition-all duration-500 cursor-pointer"
+      >
         <div className="mb-6 flex items-center justify-between">
           <Bitcoin className="w-10 h-10 text-btc-accent" strokeWidth={1.5} />
           <span
@@ -47,7 +60,13 @@ export default function Pillars() {
           Sound money, Lightning network, self-custody protocols, and
           macro-economic shifts. Freedom by code.
         </p>
-      </div>
+        <span
+          className="inline-block mt-6 text-xs text-btc-accent/60 uppercase tracking-widest group-hover:text-btc-accent transition-colors duration-200"
+          style={{ fontFamily: "var(--font-headline)" }}
+        >
+          View Bitcoin posts →
+        </span>
+      </Link>
     </section>
   );
 }

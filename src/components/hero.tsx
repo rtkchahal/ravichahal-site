@@ -4,12 +4,18 @@ import { useState, useEffect, useRef, FormEvent } from "react";
 
 const WORDS = ["Bitcoin", "Enterprise", "Production"];
 
+function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 export default function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const prefersReducedMotion = useRef(false);
 
   useEffect(() => {
@@ -29,13 +35,11 @@ export default function Hero() {
     const currentWord = WORDS[wordIndex];
 
     if (!isDeleting && displayText === currentWord) {
-      // Pause then start deleting
       const timeout = setTimeout(() => setIsDeleting(true), 2000);
       return () => clearTimeout(timeout);
     }
 
     if (isDeleting && displayText === "") {
-      // Move to next word
       setIsDeleting(false);
       setWordIndex((prev) => (prev + 1) % WORDS.length);
       return;
@@ -55,22 +59,45 @@ export default function Hero() {
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, wordIndex]);
 
-  // Initialize first word
   useEffect(() => {
     if (prefersReducedMotion.current) {
       setDisplayText(WORDS[0]);
     }
   }, []);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (email) {
-      setSubmitted(true);
+    setError("");
+
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? "Something went wrong. Please try again.");
+      } else {
+        localStorage.setItem("subscribed", "true");
+        setSubmitted(true);
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-6 md:px-8 mb-32 pt-40 md:pt-48">
+    <section id="join" className="max-w-7xl mx-auto px-6 md:px-8 mb-32 pt-40 md:pt-48">
       <div className="flex flex-col items-center text-center">
         {/* Main headline */}
         <h1
@@ -104,30 +131,45 @@ export default function Hero() {
               </span>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="w-full flex p-1 rounded-full bg-surface border border-surface-high/50 shadow-2xl mb-4 focus-within:ring-2 focus-within:ring-ai-accent/20 transition-all duration-200"
-            >
-              <input
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 bg-transparent border-none outline-none px-6 py-3 text-text-primary placeholder:text-text-muted/50"
-                style={{ fontFamily: "var(--font-body)" }}
-                required
-              />
-              <button
-                type="submit"
-                className="text-slate-900 font-black px-8 py-3 rounded-full text-xs uppercase tracking-wider transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,212,236,0.4)] cursor-pointer"
-                style={{
-                  background: "linear-gradient(135deg, #80ecff 0%, #00d4ec 100%)",
-                  fontFamily: "var(--font-headline)",
-                }}
+            <>
+              <form
+                onSubmit={handleSubmit}
+                className="w-full flex p-1 rounded-full bg-surface border border-surface-high/50 shadow-2xl mb-4 focus-within:ring-2 focus-within:ring-ai-accent/20 transition-all duration-200"
               >
-                Join the Feed
-              </button>
-            </form>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError("");
+                  }}
+                  className="flex-1 bg-transparent border-none outline-none px-6 py-3 text-text-primary placeholder:text-text-muted/50"
+                  style={{ fontFamily: "var(--font-body)" }}
+                  required
+                  disabled={loading}
+                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="text-slate-900 font-black px-8 py-3 rounded-full text-xs uppercase tracking-wider transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,212,236,0.4)] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={{
+                    background: "linear-gradient(135deg, #80ecff 0%, #00d4ec 100%)",
+                    fontFamily: "var(--font-headline)",
+                  }}
+                >
+                  {loading ? "Joining..." : "Join the Feed"}
+                </button>
+              </form>
+              {error && (
+                <p
+                  className="text-error text-xs mb-2"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {error}
+                </p>
+              )}
+            </>
           )}
 
           <p
