@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, FormEvent } from "react";
+import { MagneticButton } from "./motion/MagneticButton";
 
 const WORDS = ["Bitcoin", "Enterprise", "Production"];
 
@@ -175,17 +176,19 @@ export default function Hero() {
                   required
                   disabled={loading}
                 />
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="text-slate-900 font-black px-8 py-3 rounded-full text-xs uppercase tracking-wider transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,212,236,0.4)] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-                  style={{
-                    background: "linear-gradient(135deg, #80ecff 0%, #00d4ec 100%)",
-                    fontFamily: "var(--font-headline)",
-                  }}
-                >
-                  {loading ? "Joining..." : "Join the Feed"}
-                </button>
+                <MagneticButton>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="text-slate-900 font-black px-8 py-3 rounded-full text-xs uppercase tracking-wider transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,212,236,0.4)] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    style={{
+                      background: "linear-gradient(135deg, #80ecff 0%, #00d4ec 100%)",
+                      fontFamily: "var(--font-headline)",
+                    }}
+                  >
+                    {loading ? "Joining..." : "Join the Feed"}
+                  </button>
+                </MagneticButton>
               </form>
               {error && (
                 <p
