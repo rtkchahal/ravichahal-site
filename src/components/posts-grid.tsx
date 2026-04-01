@@ -79,11 +79,21 @@ export default function PostsGrid({ posts, initialFilter = "all" }: PostsGridPro
 
                   {/* Title */}
                   <h2
-                    className="text-2xl font-bold text-text-primary mb-3 leading-tight group-hover:text-ai-accent transition-colors duration-200"
+                    className="text-2xl font-bold text-text-primary mb-2 leading-tight group-hover:text-ai-accent transition-colors duration-200"
                     style={{ fontFamily: "var(--font-headline)" }}
                   >
                     {post.title}
                   </h2>
+
+                  {/* Subtitle */}
+                  {post.subtitle && (
+                    <p
+                      className="text-text-muted text-sm truncate mb-4 leading-snug"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      {post.subtitle}
+                    </p>
+                  )}
 
                   {/* Preview */}
                   <p

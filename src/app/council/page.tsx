@@ -15,6 +15,7 @@ interface CouncilSession {
   duration: string;
   topic: string;
   outcome: string;
+  models?: string;
 }
 
 function parseCouncilLog(raw: string): CouncilSession[] {
@@ -27,6 +28,8 @@ function parseCouncilLog(raw: string): CouncilSession[] {
     const topicMatch = block.match(/\*\*Topic:\*\* (.+)/);
     const outcomeMatch = block.match(/\*\*Outcome:\*\* (.+)/);
 
+    const modelsMatch = block.match(/\*\*Models:\*\* (.+)/);
+
     if (sessionMatch) {
       sessions.push({
         session: parseInt(sessionMatch[1]),
@@ -34,6 +37,7 @@ function parseCouncilLog(raw: string): CouncilSession[] {
         duration: durationMatch?.[1] ?? "—",
         topic: topicMatch?.[1] ?? "—",
         outcome: outcomeMatch?.[1] ?? "—",
+        models: modelsMatch?.[1],
       });
     }
   }
@@ -108,7 +112,7 @@ export default async function CouncilPage() {
         </div>
 
         {/* Stats row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           <div className="bg-surface/60 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-2">
               <FileText className="w-4 h-4 text-ai-accent" strokeWidth={1.5} />
@@ -161,6 +165,29 @@ export default async function CouncilPage() {
             >
               {nextSession}
             </p>
+          </div>
+
+          <div className="bg-surface/60 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="w-4 h-4 text-ai-accent" strokeWidth={1.5} />
+              <span
+                className="text-[10px] uppercase tracking-widest text-text-muted"
+                style={{ fontFamily: "var(--font-headline)" }}
+              >
+                Council Members
+              </span>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              {["Proposer", "Challenger", "Synthesizer"].map((role) => (
+                <span
+                  key={role}
+                  className="text-xs text-text-muted/80 font-medium"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {role}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -304,6 +331,15 @@ export default async function CouncilPage() {
                 >
                   {session.outcome}
                 </p>
+
+                {session.models && (
+                  <p
+                    className="text-[10px] text-text-muted/40 mt-2 uppercase tracking-widest"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    Models: {session.models}
+                  </p>
+                )}
               </div>
             ))}
           </div>

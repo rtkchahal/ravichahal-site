@@ -38,6 +38,7 @@ export default function Nav() {
           style={{ fontFamily: "var(--font-headline)" }}
         >
           <Link href="/posts" className="text-text-muted hover:text-text-primary transition-colors duration-200">Latest</Link>
+          <Link href="/columns" className="text-text-muted hover:text-text-primary transition-colors duration-200">Columns</Link>
           <Link href="/lab" className="text-text-muted hover:text-text-primary transition-colors duration-200">The Lab</Link>
           <a href="/#about" className="text-text-muted hover:text-text-primary transition-colors duration-200">About</a>
           <Link href="/council" className="text-text-muted hover:text-text-primary transition-colors duration-200">Council</Link>
@@ -81,6 +82,7 @@ export default function Nav() {
         <div className="md:hidden border-t border-white/10 bg-slate-900/95 backdrop-blur-xl" style={{ fontFamily: "var(--font-headline)" }}>
           <div className="flex flex-col px-6 py-4 space-y-1">
             <Link href="/posts" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">Latest</Link>
+            <Link href="/columns" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">Columns</Link>
             <Link href="/lab" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">The Lab</Link>
             <a href="/#about" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">About</a>
             <Link href="/council" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">Council</Link>

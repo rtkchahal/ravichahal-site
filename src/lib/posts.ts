@@ -5,6 +5,7 @@ import matter from "gray-matter";
 export interface Post {
   slug: string;
   title: string;
+  subtitle?: string;
   tag: string;
   preview: string;
   date: string; // Display format: "MAR 14, 2026"
@@ -40,6 +41,7 @@ export function getAllPosts(): Post[] {
       return {
         slug,
         title: data.title as string,
+        subtitle: data.subtitle as string | undefined,
         tag: data.tag as string,
         preview: data.preview as string,
         date: formatDate(data.date as string),

@@ -73,11 +73,21 @@ export default async function PostPage({ params }: PostPageProps) {
 
           {/* Title */}
           <h1
-            className="text-4xl md:text-5xl font-bold tracking-tighter text-text-primary mb-12 leading-tight"
+            className={`text-4xl md:text-5xl font-bold tracking-tighter text-text-primary leading-tight ${post.subtitle ? "mb-3" : "mb-12"}`}
             style={{ fontFamily: "var(--font-headline)" }}
           >
             {post.title}
           </h1>
+
+          {/* Subtitle */}
+          {post.subtitle && (
+            <p
+              className="text-text-muted text-lg mb-10 leading-snug"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {post.subtitle}
+            </p>
+          )}
 
           {/* MDX Content */}
           <div className="prose-content">
