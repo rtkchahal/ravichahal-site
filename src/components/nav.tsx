@@ -41,6 +41,7 @@ export default function Nav() {
           <Link href="/lab" className="text-text-muted hover:text-text-primary transition-colors duration-200">The Lab</Link>
           <a href="/#about" className="text-text-muted hover:text-text-primary transition-colors duration-200">About</a>
           <Link href="/council" className="text-text-muted hover:text-text-primary transition-colors duration-200">Council</Link>
+          <Link href="/failures" className="text-text-muted hover:text-ai-accent transition-colors duration-200">Failures</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -82,7 +83,8 @@ export default function Nav() {
             <Link href="/posts" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">Latest</Link>
             <Link href="/lab" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">The Lab</Link>
             <a href="/#about" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">About</a>
-            <Link href="/council" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200">Council</Link>
+            <Link href="/council" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-text-primary transition-colors duration-200 border-b border-white/5">Council</Link>
+            <Link href="/failures" onClick={() => setMenuOpen(false)} className="py-3 text-sm uppercase tracking-widest text-text-muted hover:text-ai-accent transition-colors duration-200">Failures</Link>
           </div>
         </div>
       )}

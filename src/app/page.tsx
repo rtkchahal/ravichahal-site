@@ -2,6 +2,7 @@ import Nav from "@/components/nav";
 import Hero from "@/components/hero";
 import Pillars from "@/components/pillars";
 import LatestPosts from "@/components/latest-posts";
+import FailuresCTA from "@/components/failures-cta";
 import TheLab from "@/components/the-lab";
 import About from "@/components/about";
 import Footer from "@/components/footer";
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <Pillars />
         <LatestPosts />
+        <FailuresCTA />
         <TheLab />
         <About />
       </main>
