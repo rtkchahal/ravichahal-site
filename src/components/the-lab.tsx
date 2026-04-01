@@ -59,19 +59,7 @@ export default function TheLab() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {LAB_EXPERIMENTS.map((exp) => (
           <div key={exp.id} className="relative group overflow-hidden rounded-2xl">
-            {/* Blur overlay - only show when not subscribed */}
-            {mounted && !subscribed && (
-              <div className="absolute inset-0 bg-surface-high/80 backdrop-blur-md z-10 flex flex-col items-center justify-center p-8 group-hover:bg-surface-high/60 transition-all duration-300">
-                <Lock className="w-10 h-10 text-text-primary mb-4" />
-                <p
-                  className="text-xs uppercase tracking-widest text-text-primary/60"
-                  style={{ fontFamily: "var(--font-headline)" }}
-                >
-                  Locked Experiment
-                </p>
-              </div>
-            )}
-            {/* Unlocked state */}
+            {/* Hover overlay for subscribed users */}
             {mounted && subscribed && (
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center p-8 bg-ai-accent/5 opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <FlaskConical className="w-10 h-10 text-ai-accent mb-4" />
@@ -84,7 +72,7 @@ export default function TheLab() {
               </div>
             )}
             <div className="p-10 border border-white/5 h-64 flex flex-col justify-end bg-surface/60">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mb-2">
                 <h5
                   className="font-bold text-xl text-text-primary"
                   style={{ fontFamily: "var(--font-headline)" }}
@@ -98,6 +86,16 @@ export default function TheLab() {
                   {exp.status}
                 </span>
               </div>
+              {/* Subtle locked indicator for non-subscribers */}
+              {mounted && !subscribed && (
+                <p
+                  className="text-[10px] uppercase tracking-widest text-text-muted/40 flex items-center gap-1 mt-1"
+                  style={{ fontFamily: "var(--font-headline)" }}
+                >
+                  <Lock className="w-2.5 h-2.5" strokeWidth={2} />
+                  Subscribe for full access
+                </p>
+              )}
             </div>
           </div>
         ))}

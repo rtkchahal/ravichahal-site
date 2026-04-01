@@ -164,6 +164,24 @@ export default function LabPage() {
             </p>
           </div>
 
+          {/* Intro copy */}
+          {!subscribed && (
+            <div className="max-w-2xl mb-12">
+              <p
+                className="text-text-muted text-base leading-relaxed"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                The Lab is where I run real experiments at the intersection of
+                AI agents and Bitcoin — not demos, not thought experiments, but
+                live systems with hypotheses and tracked results. Each
+                experiment documents what I&apos;m testing, what&apos;s
+                working, and what isn&apos;t. Subscribers get full access to
+                the raw data, architectural decisions, and iteration logs as
+                they happen. Currently running 3 active experiments.
+              </p>
+            </div>
+          )}
+
           {/* Experiment cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {EXPERIMENTS.map((experiment) => {
@@ -212,15 +230,32 @@ export default function LabPage() {
                       {experiment.description}
                     </p>
 
-                    {/* Full details if subscribed */}
-                    {subscribed && (
+                    {/* Details — always rendered, blurred when not subscribed */}
+                    <div
+                      className={`mt-2 pt-4 border-t border-white/5 relative ${
+                        !subscribed ? "select-none" : ""
+                      }`}
+                    >
                       <p
-                        className="text-text-primary/70 text-sm leading-relaxed mt-2 pt-4 border-t border-white/5"
+                        className={`text-text-primary/70 text-sm leading-relaxed ${
+                          !subscribed ? "blur-sm" : ""
+                        }`}
                         style={{ fontFamily: "var(--font-body)" }}
                       >
                         {experiment.details}
                       </p>
-                    )}
+                      {!subscribed && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span
+                            className="text-[10px] uppercase tracking-widest text-text-muted/70 flex items-center gap-1.5"
+                            style={{ fontFamily: "var(--font-headline)" }}
+                          >
+                            <Lock className="w-3 h-3" strokeWidth={2} />
+                            Subscribe to unlock
+                          </span>
+                        </div>
+                      )}
+                    </div>
 
                     {/* Link if applicable */}
                     {subscribed && experiment.link && (
@@ -234,22 +269,6 @@ export default function LabPage() {
                       </Link>
                     )}
                   </div>
-
-                  {/* Blur overlay for locked state */}
-                  {!subscribed && (
-                    <div className="absolute inset-0 bg-surface-high/70 backdrop-blur-sm z-10 flex flex-col items-center justify-center p-8">
-                      <Lock
-                        className="w-8 h-8 text-text-primary/60 mb-3"
-                        strokeWidth={1.5}
-                      />
-                      <p
-                        className="text-xs uppercase tracking-widest text-text-primary/50 text-center"
-                        style={{ fontFamily: "var(--font-headline)" }}
-                      >
-                        Subscribe to unlock
-                      </p>
-                    </div>
-                  )}
                 </div>
               );
             })}
